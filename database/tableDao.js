@@ -6,7 +6,7 @@ const File = require('./model/files');
 const file = require('./model/files');
 
 mongoose.connect(
-    'mongodb+srv://root:IA9jsLHc5rtceyYh@cluster0.ra5t3.mongodb.net/DMS?retryWrites=true&w=majority',
+    'mongodb+srv://root:<password>@cluster0.ra5t3.mongodb.net/DMS?retryWrites=true&w=majority',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true
