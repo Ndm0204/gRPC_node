@@ -20,7 +20,7 @@ async function createUser(data){
     catch(err){
         console.log(err);
         if(err.code == 11000){
-
+            return {message: "User is already Existed!", status:409 };
         }
     }
 }
@@ -36,7 +36,7 @@ async function createFolder(data){
     catch(err){
         console.log(err);
         if(err.code == 11000){
-
+            return {message: "Folder is already Existed!", status:409 };
         }
     }
 }
@@ -49,7 +49,7 @@ async function createFile(data){
     catch(err){
         console.log(err);
         if(err.code == 11000){
-
+            return {message: "File is already Existed!", status:409 };
         }
     }
 }
