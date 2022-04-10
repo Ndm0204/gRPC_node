@@ -15,12 +15,13 @@ class MongoDb{
     async connect(){
         try{
             await mongoose.connect(
-                'mongodb+srv://root:root@cluster0.ra5t3.mongodb.net/DMS?retryWrites=true&w=majority',
+                'mongodb+srv://:@cluster0.ra5t3.mongodb.net/DMS?retryWrites=true&w=majority',
                 {
                   useNewUrlParser: true,
                   useUnifiedTopology: true
                 }
               );
+              console.info.bind('connected');
         }
         catch(err){
             console.error(err);
