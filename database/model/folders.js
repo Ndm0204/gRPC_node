@@ -9,16 +9,17 @@ const folderSchema =  new mongoose.Schema({
     _id: { type: String, default: function genUUID() {
         return uuid()
     }},
-    name: {type: String, unique: true, required: true},
-    content: {type: String},
+    name: {type: String},
     isFile: {type:String, default: false},
     createdOn: {type: Date, default: Date.now()},
     updatedOn: {type: Date, default: Date.now()},
+    Parent:{type: mongoose.Schema.Types.String, ref: 'folder', default: "/"},
     owner:{type: mongoose.Schema.Types.String, ref: 'user'},
-    Parent:{type: mongoose.Schema.Types.String, ref: 'folder'},
-    files:[{type: mongoose.Schema.Types.String, ref: 'file'}] 
+    
 
 });
+
+folderSchema.index({ name: 1, owner:1 },{unique: true});
 
 const folder = mongoose.model('folder',folderSchema);
 

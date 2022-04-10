@@ -12,11 +12,11 @@ const fileSchema =  new mongoose.Schema({
     isFile: {type:String, default: true},
     createdOn: {type: Date, default: Date.now()},
     updatedOn: {type: Date, default: Date.now()},
-    Parent:{type: mongoose.Schema.Types.String, ref: 'folder'},
+    parent:{type: mongoose.Schema.Types.String, ref: 'folder'},
     owner:{type: mongoose.Schema.Types.String, ref: 'user'} 
 
 })
-
+fileSchema.index({ name: 1, parent:1, owner: 1  },{unique: true});
 const file = mongoose.model('file',fileSchema);
 
 module.exports = file;
