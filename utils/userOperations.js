@@ -1,5 +1,4 @@
-const tableDao = require('./database/tableDao');
-
+const tableDao = require('../database/tableDao');
 async function createUser(call,callback){
     console.log(call.request);
     const user = await tableDao.createUser(call.request);

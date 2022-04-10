@@ -1,4 +1,4 @@
-const tableDao = require('./database/tableDao');
+const tableDao = require('../database/tableDao');
 
 async function createFile(call,callback){
     console.log(call.request);
@@ -20,8 +20,10 @@ async function getFiles(call,callback){
     await tableDao.getAllFiles(call.request);
     return callback(null,{});
 }   
-async function getAllRootLevelFiles(call){
-
+function getAllRootLevelFiles(query){
+    
+    return tableDao.getAllRootFiles(query);
+    
 }
 module.exports = {
     createFile,
