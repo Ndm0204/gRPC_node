@@ -3,20 +3,14 @@ const mongoose = require('mongoose');
 const User = require('./model/users');
 const Folder = require('./model/folders');
 const File = require('./model/files');
-const file = require('./model/files');
 
 mongoose.connect(
-    'mongodb+srv://root:<password>@cluster0.ra5t3.mongodb.net/DMS?retryWrites=true&w=majority',
+    'mongodb+srv://root:IA9jsLHc5rtceyYh@cluster0.ra5t3.mongodb.net/DMS?retryWrites=true&w=majority',
     {
       useNewUrlParser: true,
       useUnifiedTopology: true
     }
   );
-createFolder({
-    name:'folder',
-    parent:'./',
-    owner:'54f0d030-b8cc-11ec-a40b-2940da2a6b83'});
-
 async function createUser(data){
     try{
         const user = new User(data);
@@ -61,7 +55,7 @@ async function createFile(data){
 }
 async function moveFile(id,data){
     try{
-        file = await file.findByIdAndUpdate(id, data);
+        const file = await File.findByIdAndUpdate(id, data);
         console.log(file);
     }
     catch(err){
@@ -71,8 +65,9 @@ async function moveFile(id,data){
 
 async function updateFile(id,data){
     try{
-        file = await file.findByIdAndUpdate(id, data);
+        const file = await File.findByIdAndUpdate(id, data);
         console.log(file);
+        return file;
     }
     catch(err){
         console.log(err);
@@ -81,13 +76,44 @@ async function updateFile(id,data){
 
 async function deleteFile(id){
     try{
-        await file.findByIdAndRemove(id);
+        await File.findByIdAndRemove(id);
     }
     catch(err){
         console.log(err);
     }
 }
-
+async function getAllFiles(folderId){
+    try{
+        const files = await File.find(folderId);
+        return files;
+    }
+    catch(err){
+        console.log(err);
+        throw err;
+    }
+}
+async function getAllRootFiles(query){
+    try{
+        query.parent = './'
+        const files = await File.find(query);
+        return files;
+    }
+    catch(err){
+        console.log(err);
+        throw err;
+    }
+}
+async function getAllFolders(query){
+    try{
+        query.parent = './'
+        const files = await Folder.find(query);
+        return files;
+    }
+    catch(err){
+        console.log(err);
+        throw err;
+    }
+}
 module.exports={
     createFile,
     createUser,
@@ -95,4 +121,7 @@ module.exports={
     moveFile,
     updateFile,
     deleteFile,
+    getAllFiles,
+    getAllRootFiles,
+    getAllFolders,
 }

@@ -4,20 +4,29 @@ const packageDef =  protoLoader.loadSync('DMS.proto', {});
 const grpcObject =  grpc.loadPackageDefinition(packageDef);
 const DMSPackage = grpcObject.DMSPackage;
 
+const Folder =  require('./utils/folderOperations');
+const User = require('./utils/userOperations')
+const File =  require('./utils/fileOperations');
 
-
-// const DMSDefinition = grpc.load(require('path').resolve('./proto/DMS.proto'));
-const tableDao = require('./database/tableDao');
-
-function createFolder(data,callback){
-    console.log(data);
-    return callback(null,tableDao.createFolder(data));
-};
 const server = new grpc.Server();
+
 server.addService(DMSPackage.DMSService.service,{
-        "createFolder": createFolder
+        "createFolder": Folder.createFolder,
+        "createFile": File.createFile,
+        "deleteFile": File.deleteFile,
+        "moveFile": File.moveFile,
+        "getFiles": File.getFiles,
+        "getAll": getAll,
+        "createUser": User.createUser
     });
 
+async function getAll(call,callback){
+    const res = {};
+    res.files = await File.getAllRootLevelFiles(call.request);
+    res.folders = await Folder.getAllFolder(call.request);  
+    return callback(null,res);
+
+}
 server.bindAsync('0.0.0.0:40000',grpc.ServerCredentials.createInsecure(),(err,port)=>{
     if(err){
         return console.error(err);
