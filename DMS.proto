@@ -9,6 +9,7 @@ service DMSService {
     rpc moveFile(FileMoveInput) returns(AllFiles);
     rpc getAll(UserId) returns(AllData);
     rpc getFiles(FolderId) returns(AllFiles);
+    rpc createUser(OwnerInput) returns(Owner);
  }
 
 message Void{}
@@ -45,7 +46,10 @@ message Owner{
     string username=2;
     string name=3;
 }
-
+message OwnerInput{
+    string username=2;
+    string name=3;
+}
 message File{
     string _id=1;
     string name=2;
