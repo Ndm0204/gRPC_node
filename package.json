@@ -1,0 +1,27 @@
+{
+  "name": "grpc_node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ndm0204/gRPC_node.git"
+  },
+  "author": "Nadeem Beg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ndm0204/gRPC_node/issues"
+  },
+  "homepage": "https://github.com/Ndm0204/gRPC_node#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-async-errors": "^3.1.1",
+    "google-protobuf": "^3.20.1-rc.1",
+    "grpc": "^1.24.11",
+    "mongoose": "^6.2.10",
+    "uuid": "^8.3.2"
+  }
+}
