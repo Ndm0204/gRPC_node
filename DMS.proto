@@ -24,7 +24,7 @@ message FolderId{
 }
 
 message FileMoveInput{
-    string id = 1;
+    string _id = 1;
     string parent = 2;
 }
 
