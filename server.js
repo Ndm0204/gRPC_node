@@ -13,6 +13,7 @@ const server = new grpc.Server();
 server.addService(DMSPackage.DMSService.service,{
         "createFolder": Folder.createFolder,
         "getFolder": Folder.getFolder,
+        "deleteFolder": Folder.deleteFolder,
         "createFile": File.createFile,
         "deleteFile": File.deleteFile,
         "moveFile": File.moveFile,
