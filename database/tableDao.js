@@ -28,7 +28,6 @@ async function createUser(data){
 async function createFolder(data){
     try{
         const folder = new Folder(data);
-        console.log("early:",folder);
         await folder.save();
         console.log(folder);
         return folder;
@@ -36,7 +35,7 @@ async function createFolder(data){
     catch(err){
         console.log(err);
         if(err.code == 11000){
-            return {message: "Folder is already Existed!", status:409 };
+            throw new Error('Folder Already Exists!');
         }
     }
 }
@@ -94,7 +93,7 @@ async function getAllFiles(folderId){
 }
 async function getAllRootFiles(query){
     try{
-        query.parent = './'
+        query.parent = '/'
         const files = await File.find(query);
         return files;
     }
@@ -105,9 +104,11 @@ async function getAllRootFiles(query){
 }
 async function getAllFolders(query){
     try{
-        query.parent = './'
-        const files = await Folder.find(query);
-        return files;
+        query.parent = '/'
+        console.log(query);
+        const folders = await Folder.find(query);
+        console.log(folders);
+        return folders;
     }
     catch(err){
         console.log(err);

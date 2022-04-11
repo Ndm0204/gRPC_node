@@ -10,7 +10,7 @@ const folderSchema =  new mongoose.Schema({
         return uuid()
     }},
     name: {type: String},
-    isFile: {type:String, default: false},
+    isFile: {type:Boolean, default: false},
     createdOn: {type: Date, default: Date.now()},
     updatedOn: {type: Date, default: Date.now()},
     Parent:{type: mongoose.Schema.Types.String, ref: 'folder', default: "/"},

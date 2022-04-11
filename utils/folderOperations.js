@@ -1,9 +1,14 @@
 const tableDao = require('../database/tableDao');
 
 async function createFolder(call,callback){
-    console.log(call.request);
-    const folder = await tableDao.createFolder(call.request);
-    return await callback(null,folder);
+    let err = null;
+    let folder = null;
+    try{
+        folder = await tableDao.createFolder(call.request);
+    }catch(e){
+        err = e;
+    }
+    return await callback(err,folder);
 };
 async function getAllFolder(query){
     return tableDao.getAllFolders(query);

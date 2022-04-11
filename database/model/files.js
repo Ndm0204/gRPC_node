@@ -9,10 +9,10 @@ const fileSchema =  new mongoose.Schema({
     }},
     name: {type: String, required: true},
     content: {type: String},
-    isFile: {type:String, default: true},
+    isFile: {type:Boolean, default: true},
     createdOn: {type: Date, default: Date.now()},
     updatedOn: {type: Date, default: Date.now()},
-    parent:{type: mongoose.Schema.Types.String, ref: 'folder'},
+    parent:{type: mongoose.Schema.Types.String, ref: 'folder',default: "/"},
     owner:{type: mongoose.Schema.Types.String, ref: 'user'} 
 
 })

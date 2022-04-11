@@ -39,7 +39,7 @@ message FolderInput {
     string owner=3; 
 }
 message UserId{
-    string _id=1;
+    string owner=1;
 }
 message Owner{
     string _id=1;
