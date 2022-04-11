@@ -1,0 +1,87 @@
+syntax = "proto3";
+
+package DMSPackage;
+
+service DMSService {
+    rpc createFile(FileInput) returns(File);
+    rpc getFile(FileId) returns (File);
+    rpc createFolder(FolderInput) returns(Folder);
+    rpc deleteFile(FileId) returns (Void);
+    rpc moveFile(FileMoveInput) returns(File);
+    rpc getAll(UserId) returns(AllData);
+    rpc getFiles(FolderId) returns(AllFiles);
+    rpc createUser(OwnerInput) returns(Owner);
+    rpc getUser(UserName) returns(Owner);
+    rpc getFolder(FolderId) returns(Folder);
+    rpc deleteFolder(FolderId) returns(Void);
+ }
+
+message Void{}
+
+message UserName{
+    string username=1;
+}
+message FileId{
+    string _id=1;
+}
+
+message FolderId{
+    string _id=1;
+}
+
+message FileMoveInput{
+    string _id = 1;
+    string parent = 2;
+}
+
+message FileInput {
+    string name=1;
+    string content=2;
+    string parent=3;
+    string owner=4; 
+}
+message FolderInput {
+    string name = 1;
+    string parent=2;
+    string owner=3; 
+}
+message UserId{
+    string owner=1;
+}
+message Owner{
+    string _id=1;
+    string username=2;
+    string name=3;
+}
+message OwnerInput{
+    string username=1;
+    string name=2;
+}
+message File{
+    string _id=1;
+    string name=2;
+    string content=3;
+    bool isFile=4;
+    string createdOn=5;
+    string updatedOn= 6;
+    string parent=7;
+    string owner=8; 
+}
+message Folder{
+    string _id=1;
+    string name=2;
+    bool isFile=3;
+    string createdOn=4;
+    string updatedOn= 5;
+    string parent=6;
+    string owner=7; 
+}
+
+message AllData{
+    repeated File files = 1;
+    repeated Folder folders =2;
+}
+
+message AllFiles{
+    repeated File files = 1;
+}
