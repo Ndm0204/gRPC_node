@@ -22,11 +22,17 @@ server.addService(DMSPackage.DMSService.service,{
     });
 
 async function getAll(call,callback){
+    let errObj = null;
     const res = {};
-    res.files = await File.getAllRootLevelFiles(call.request);
-    res.folders = await Folder.getAllFolder(call.request);
-    console.log(res);  
-    return callback(null,res);
+    try{
+        res.files = await File.getAllRootLevelFiles(call.request);
+        res.folders = await Folder.getAllFolder(call.request);
+        console.log(res); 
+    }
+    catch(err){
+        errObj = err;
+    } 
+    return callback(errObj,res);
 
 }
 server.bindAsync('0.0.0.0:40000',grpc.ServerCredentials.createInsecure(),(err,port)=>{
