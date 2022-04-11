@@ -48,8 +48,8 @@ message Owner{
     string name=3;
 }
 message OwnerInput{
-    string username=2;
-    string name=3;
+    string username=1;
+    string name=2;
 }
 message File{
     string _id=1;
