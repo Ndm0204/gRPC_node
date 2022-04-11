@@ -7,7 +7,7 @@ service DMSService {
     rpc getFile(FileId) returns (File);
     rpc createFolder(FolderInput) returns(Folder);
     rpc deleteFile(FileId) returns (Void);
-    rpc moveFile(FileMoveInput) returns(AllFiles);
+    rpc moveFile(FileMoveInput) returns(File);
     rpc getAll(UserId) returns(AllData);
     rpc getFiles(FolderId) returns(AllFiles);
     rpc createUser(OwnerInput) returns(Owner);

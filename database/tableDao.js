@@ -58,6 +58,7 @@ async function moveFile(id,data){
     try{
         const file = await File.findByIdAndUpdate(id, data);
         console.log(file);
+        return file;
     }
     catch(err){
         console.log(err);
@@ -91,9 +92,13 @@ async function deleteFile(id){
         console.log(err);
     }
 }
-async function getAllFiles(folderId){
+async function getAllFiles(parentId){
     try{
-        const files = await File.find(folderId);
+        const query = {
+            parent:parentId._id
+        };
+        console.log(`${JSON.stringify(parentId)} ${JSON.stringify(query)}`)
+        const files = await File.find(query);
         return files;
     }
     catch(err){

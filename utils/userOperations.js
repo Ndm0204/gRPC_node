@@ -1,8 +1,13 @@
 const tableDao = require('../database/tableDao');
 async function createUser(call,callback){
-    console.log(call.request);
-    const user = await tableDao.createUser(call.request);
-    return callback(null,user);
+    let err = null;
+    let user = null;
+    try{
+        user = await tableDao.createUser(call.request);
+    }catch(e){
+        err = e;
+    }
+    return await callback(err,user);
 };
 
 module.exports = {

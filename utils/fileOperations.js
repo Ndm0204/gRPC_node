@@ -17,19 +17,30 @@ async function getFile(call,callback) {
     return callback(null,file);
 }
 async function deleteFile(call,callback) {
+    let err = null;
     console.log(call.request);
-    await tableDao.deleteFile(call.request);
-    return callback(null,{});
+    try{
+        await tableDao.deleteFile(call.request);
+    }
+    catch(e){
+        err=e;
+    }
+    return callback(err,{});
 }
 async function moveFile(call,callback){
     console.log(call.request);
-    await tableDao.moveFile(call.request);
-    return callback(null,{});
+    const data = {};
+    data.parent=call.request.parent;
+    const file = await tableDao.moveFile(call.request._id,data);
+    return callback(null,file);
 }
 async function getFiles(call,callback){
+    const res = {}
     console.log(call.request);
-    await tableDao.getAllFiles(call.request);
-    return callback(null,{});
+    const files = await tableDao.getAllFiles(call.request);
+    res.files = files;
+    console.log(res);
+    return callback(null,res);
 }   
 function getAllRootLevelFiles(query){
     
