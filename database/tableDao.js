@@ -20,8 +20,9 @@ async function createUser(data){
     catch(err){
         console.log(err);
         if(err.code == 11000){
-            return {message: "User is already Existed!", status:409 };
+            throw new Error('User Already Exists!');
         }
+        throw new Error('Error Creating user');
     }
 }
 
@@ -37,6 +38,7 @@ async function createFolder(data){
         if(err.code == 11000){
             throw new Error('Folder Already Exists!');
         }
+        throw new Error('Error Creating folder');
     }
 }
 
@@ -52,6 +54,7 @@ async function createFile(data){
         if(err.code == 11000){
             throw new Error('Folder Already Exists!');
         }
+        throw new Error('Error Creating file');
     }
 }
 async function moveFile(id,data){
@@ -62,6 +65,7 @@ async function moveFile(id,data){
     }
     catch(err){
         console.log(err);
+        throw new Error(err.message);
     }
 }
 
@@ -73,6 +77,7 @@ async function updateFile(id,data){
     }
     catch(err){
         console.log(err);
+        throw new Error(err.message);
     }
 }
 async function getFile(query){
@@ -82,6 +87,7 @@ async function getFile(query){
     }
     catch(err){
         console.log(err);
+        throw new Error(err.message);
     }
 }
 async function deleteFile(id){
@@ -90,6 +96,7 @@ async function deleteFile(id){
     }
     catch(err){
         console.log(err);
+        throw new Error(err.message);
     }
 }
 async function getAllFiles(parentId){
@@ -103,7 +110,7 @@ async function getAllFiles(parentId){
     }
     catch(err){
         console.log(err);
-        throw err;
+        throw new Error(err.message);;
     }
 }
 async function getAllRootFiles(query){
@@ -114,7 +121,7 @@ async function getAllRootFiles(query){
     }
     catch(err){
         console.log(err);
-        throw err;
+        throw new Error(err.message);
     }
 }
 async function getAllFolders(query){
@@ -127,7 +134,7 @@ async function getAllFolders(query){
     }
     catch(err){
         console.log(err);
-        throw err;
+        throw new Error(err.message);
     }
 }
 module.exports={
