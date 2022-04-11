@@ -16,6 +16,7 @@ async function createUser(data){
         const user = new User(data);
         await user.save();
         console.log(user);
+        return user;
     }
     catch(err){
         console.log(err);
