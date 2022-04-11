@@ -11,10 +11,15 @@ service DMSService {
     rpc getAll(UserId) returns(AllData);
     rpc getFiles(FolderId) returns(AllFiles);
     rpc createUser(OwnerInput) returns(Owner);
+    rpc getUser(UserName) returns(Owner);
+    rpc getFolder(FolderId) returns(Folder);
  }
 
 message Void{}
 
+message UserName{
+    string username=1;
+}
 message FileId{
     string _id=1;
 }

@@ -12,13 +12,15 @@ const server = new grpc.Server();
 
 server.addService(DMSPackage.DMSService.service,{
         "createFolder": Folder.createFolder,
+        "getFolder": Folder.getFolder,
         "createFile": File.createFile,
         "deleteFile": File.deleteFile,
         "moveFile": File.moveFile,
         "getFiles": File.getFiles,
         "getFile": File.getFile,
         "getAll": getAll,
-        "createUser": User.createUser
+        "createUser": User.createUser,
+        "getUser": User.getUser,
     });
 
 async function getAll(call,callback){

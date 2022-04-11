@@ -13,7 +13,18 @@ async function createFolder(call,callback){
 async function getAllFolder(query){
     return tableDao.getAllFolders(query);
 }
+async function getFolder(call,callback){
+    let err = null;
+    let folder = null;
+    try{
+        folder = await tableDao.getFolder(call.request);
+    }catch(e){
+        err = e;
+    }
+    return await callback(err,folder);
+};
 module.exports = {
     createFolder,
     getAllFolder,
+    getFolder,
 }

@@ -26,6 +26,17 @@ async function createUser(data){
         throw new Error('Error Creating user');
     }
 }
+async function getUser(query){
+    try{
+        const user =  await User.findOne(query).exec();
+        if(user)    return user;
+        console.log(`user with username '${query.username}' does not exists`);
+        throw new Error('User does not exists');
+    }
+    catch(err){
+        throw err;
+    }
+}
 
 async function createFolder(data){
     try{
@@ -42,7 +53,18 @@ async function createFolder(data){
         throw new Error('Error Creating folder');
     }
 }
-
+async function getFolder(query){
+    try{
+        const folder = await Folder.findOne(query).exec();
+        if(folder) return folder;
+        console.log('Folder does not exists!');
+        throw new Error('Folder does not exists');
+    }
+    catch(err){
+        console.log(err);
+        throw err;
+    }
+}
 async function createFile(data){
     try{
         const file = new File(data);
@@ -149,4 +171,6 @@ module.exports={
     getAllRootFiles,
     getAllFolders,
     getFile,
+    getUser,
+    getFolder
 }
