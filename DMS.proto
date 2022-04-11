@@ -13,6 +13,7 @@ service DMSService {
     rpc createUser(OwnerInput) returns(Owner);
     rpc getUser(UserName) returns(Owner);
     rpc getFolder(FolderId) returns(Folder);
+    rpc deleteFolder(FolderId) returns(Void);
  }
 
 message Void{}

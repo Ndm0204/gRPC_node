@@ -53,6 +53,18 @@ async function createFolder(data){
         throw new Error('Error Creating folder');
     }
 }
+async function deleteFolder(id){
+    try{
+        const query = {
+            owner: id
+        };
+        await File.remove(query);
+        await Folder.remove({_id: id});
+    }
+    catch(err){
+        throw new Error('Error Deleting folder');
+    }
+}
 async function getFolder(query){
     try{
         const folder = await Folder.findOne(query).exec();
@@ -115,7 +127,7 @@ async function getFile(query){
 }
 async function deleteFile(id){
     try{
-        await File.findByIdAndRemove(id);
+        await File.remove({_id: id});
     }
     catch(err){
         console.log(err);
@@ -172,5 +184,6 @@ module.exports={
     getAllFolders,
     getFile,
     getUser,
-    getFolder
+    getFolder,
+    deleteFolder,
 }

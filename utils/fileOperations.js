@@ -27,7 +27,7 @@ async function deleteFile(call,callback) {
     let err = null;
     console.log(call.request);
     try{
-        await tableDao.deleteFile(call.request);
+        await tableDao.deleteFile(call.request._id);
     }
     catch(e){
         err=e;

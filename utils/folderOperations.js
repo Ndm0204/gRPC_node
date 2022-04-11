@@ -23,8 +23,19 @@ async function getFolder(call,callback){
     }
     return await callback(err,folder);
 };
+async function deleteFolder(call,callback){
+    let err = null;
+    let folder = null;
+    try{
+        folder = await tableDao.deleteFolder(call.request._id);
+    }catch(e){
+        err = e;
+    }
+    return await callback(err,folder);
+};
 module.exports = {
     createFolder,
     getAllFolder,
     getFolder,
+    deleteFolder,
 }
