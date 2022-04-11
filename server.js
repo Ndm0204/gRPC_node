@@ -16,6 +16,7 @@ server.addService(DMSPackage.DMSService.service,{
         "deleteFile": File.deleteFile,
         "moveFile": File.moveFile,
         "getFiles": File.getFiles,
+        "getFile": File.getFile,
         "getAll": getAll,
         "createUser": User.createUser
     });
@@ -23,7 +24,8 @@ server.addService(DMSPackage.DMSService.service,{
 async function getAll(call,callback){
     const res = {};
     res.files = await File.getAllRootLevelFiles(call.request);
-    res.folders = await Folder.getAllFolder(call.request);  
+    res.folders = await Folder.getAllFolder(call.request);
+    console.log(res);  
     return callback(null,res);
 
 }

@@ -1,8 +1,19 @@
 const tableDao = require('../database/tableDao');
 
 async function createFile(call,callback){
+    
+    let err = null;
+    let file = null;
+    try{
+        file = await tableDao.createFile(call.request);
+    }catch(e){
+        err = e;
+    }
+    return await callback(err,file);
+}
+async function getFile(call,callback) {
     console.log(call.request);
-    const file = await tableDao.createFile(call.request);
+    const file = await tableDao.getFile(call.request);
     return callback(null,file);
 }
 async function deleteFile(call,callback) {
@@ -30,5 +41,6 @@ module.exports = {
     deleteFile,
     moveFile,
     getFiles,
-    getAllRootLevelFiles
+    getAllRootLevelFiles,
+    getFile,
 }

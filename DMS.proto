@@ -4,6 +4,7 @@ package DMSPackage;
 
 service DMSService {
     rpc createFile(FileInput) returns(File);
+    rpc getFile(FileId) returns (File);
     rpc createFolder(FolderInput) returns(Folder);
     rpc deleteFile(FileId) returns (Void);
     rpc moveFile(FileMoveInput) returns(AllFiles);

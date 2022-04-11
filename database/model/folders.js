@@ -13,7 +13,7 @@ const folderSchema =  new mongoose.Schema({
     isFile: {type:Boolean, default: false},
     createdOn: {type: Date, default: Date.now()},
     updatedOn: {type: Date, default: Date.now()},
-    Parent:{type: mongoose.Schema.Types.String, ref: 'folder', default: "/"},
+    parent:{type: mongoose.Schema.Types.String, ref: 'folder', default: "/"},
     owner:{type: mongoose.Schema.Types.String, ref: 'user'},
     
 

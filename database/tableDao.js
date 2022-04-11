@@ -44,11 +44,13 @@ async function createFile(data){
     try{
         const file = new File(data);
         await file.save();
-        console.log(file);}
+        console.log(file);
+        return file;
+    }
     catch(err){
         console.log(err);
         if(err.code == 11000){
-            return {message: "File is already Existed!", status:409 };
+            throw new Error('Folder Already Exists!');
         }
     }
 }
@@ -72,7 +74,15 @@ async function updateFile(id,data){
         console.log(err);
     }
 }
-
+async function getFile(query){
+    try{
+        const file = await File.findOne(query);
+        return file;
+    }
+    catch(err){
+        console.log(err);
+    }
+}
 async function deleteFile(id){
     try{
         await File.findByIdAndRemove(id);
@@ -93,7 +103,7 @@ async function getAllFiles(folderId){
 }
 async function getAllRootFiles(query){
     try{
-        query.parent = '/'
+        query.parent = ''
         const files = await File.find(query);
         return files;
     }
@@ -104,7 +114,7 @@ async function getAllRootFiles(query){
 }
 async function getAllFolders(query){
     try{
-        query.parent = '/'
+        query.parent = ''
         console.log(query);
         const folders = await Folder.find(query);
         console.log(folders);
@@ -125,4 +135,5 @@ module.exports={
     getAllFiles,
     getAllRootFiles,
     getAllFolders,
+    getFile,
 }
